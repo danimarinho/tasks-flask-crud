@@ -17,7 +17,7 @@ def hello_world(): #funcao
   return "Hello world!
   """
 
-@app.route("/tasks", methods=["POST"])
+@app.route('/tasks', methods=['POST'])
 def create_task(): #FUNCAO RESPONSAVEL POR CRIAR A ATIVIDADE
 #receber as informacoes do cliente
   global task_id_control #para acessar a variavel fora do metodo, ela deve ser criada dentro do metodo como glkoba
@@ -34,6 +34,37 @@ def create_task(): #FUNCAO RESPONSAVEL POR CRIAR A ATIVIDADE
   print(tasks)
   #IMPORTAR o jsonify para o print da resposta
   return jsonify({"message": "Nova tarefa criada com sucesso."})
+
+
+#CRUD- ROUTE READ - GET
+@app.route('/tasks', methods=['GET'])
+def get_tasks(): #Vai retornar todas as atividades
+  task_list = []
+  for task in tasks:
+    task_list.append(task.to_dict()) #o metodo to_dict() vai retornar a lista no formato de dicionario
+  output = {
+            "tasks": task_list,
+            "total_tasks": 0
+           }
+  
+  return jsonify(output)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 if __name__ == "__main__": #vai executar só em modo manual, do desenvolvimento local

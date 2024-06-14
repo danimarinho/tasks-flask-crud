@@ -41,17 +41,24 @@ def create_task(): #FUNCAO RESPONSAVEL POR CRIAR A ATIVIDADE
 def get_tasks(): #Vai retornar todas as atividades
   task_list = [task.to_dict()  for task in tasks] #o metodo to_dict() vai retornar a lista no formato de dicionario - utilizando o for na mesma linha; #For dentro da lista vai criar a lista com os elementos que tem dentro do tasks, porém executand o to_dict(). + elegante, simpes, economia de tempo/tempo.
   
+  #len() - conta quantos elementos tem na lista
   output = {
             "tasks": task_list,
-            "total_tasks": 0
+            "total_tasks": len(task_list)
            }
   
   return jsonify(output)
 
 
 
+#CRUD- ROUTE READ - GET específico
+@app.route('/tasks/<int:id>', methods=['GET'])
+def get_task(id):
+  for t in tasks:
+    if t.id == id:
+      return jsonify(t.to_dict())
 
-
+  return jsonify({"messagem": "Não foi possível encontrar a atividade"}, 404)
 
 
 

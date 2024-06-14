@@ -39,9 +39,8 @@ def create_task(): #FUNCAO RESPONSAVEL POR CRIAR A ATIVIDADE
 #CRUD- ROUTE READ - GET
 @app.route('/tasks', methods=['GET'])
 def get_tasks(): #Vai retornar todas as atividades
-  task_list = []
-  for task in tasks:
-    task_list.append(task.to_dict()) #o metodo to_dict() vai retornar a lista no formato de dicionario
+  task_list = [task.to_dict()  for task in tasks] #o metodo to_dict() vai retornar a lista no formato de dicionario - utilizando o for na mesma linha; #For dentro da lista vai criar a lista com os elementos que tem dentro do tasks, porém executand o to_dict(). + elegante, simpes, economia de tempo/tempo.
+  
   output = {
             "tasks": task_list,
             "total_tasks": 0

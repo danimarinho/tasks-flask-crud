@@ -33,7 +33,7 @@ def create_task(): #FUNCAO RESPONSAVEL POR CRIAR A ATIVIDADE; #receber as inform
   tasks.append(new_task)
   print(tasks)
   #IMPORTAR o jsonify para o print da resposta
-  return jsonify({"message": "Nova tarefa criada com sucesso."})
+  return jsonify({"message": "Nova tarefa criada com sucesso.", "id": new_task.id})
 
 
 #CRUD- ROUTE READ - GET
@@ -50,7 +50,6 @@ def get_tasks(): #Vai retornar todas as atividades
   return jsonify(output)
 
 
-
 #CRUD- ROUTE READ - GET específico
 @app.route('/tasks/<int:id>', methods=['GET'])
 def get_task(id):
@@ -62,7 +61,6 @@ def get_task(id):
       return jsonify(t.to_dict())
 
   return jsonify({"message": "Não foi possível encontrar a atividade"}, 404)
-
 
 #parametros de rota 
 '''
@@ -99,7 +97,7 @@ def update_task(id):
     if t.id == id:
       task = t
       break
-    
+
   print("MENSAGEM1: ", task)
 
   if task == None:
@@ -113,6 +111,7 @@ def update_task(id):
   task.completed    = data["completed"]
   print("MENSAGEM 2: ", task)
   return jsonify({"message": "Tarefa atualizada com sucesso"})
+
 
 #CRUD- ROUTE DELETE - DELETAR
 @app.route('/tasks/<int:id>', methods=["DELETE"])

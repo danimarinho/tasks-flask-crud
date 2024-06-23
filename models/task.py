@@ -1,7 +1,8 @@
 class Task:
     #construtor
+    #id, title, description - atributos
     def __init__(self, id, title, description, completed=False) -> None:
-        self.id = id
+        self.id = id #definindo atributos passando o self
         self.title = title
         self.description = description
         self.completed = completed

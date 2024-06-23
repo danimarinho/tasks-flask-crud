@@ -28,3 +28,31 @@ def test_create_task():
     
     #adicionar o id na lista de tasks criado
     tasks.append(response_json["id"])
+
+
+#READ - TESTE DE LEITURA
+#Recuperar TODAS as atividades cadastradas
+def test_get_tasks():
+    #enviar requisição GET na url
+    response = requests.get(f"{BASE_URL}/tasks")
+    
+    assert response.status_code == 200 #validação
+    
+    response_json = response.json() #este método vai trazer o corpo da resposta
+    assert "tasks" in response_json #validação
+    assert "total_tasks" in response_json #validação
+
+
+#Recuperar uma tarefa específica
+def test_get_task():
+    #usar a lista task criada anteriormente
+    if tasks:
+        task_id  = tasks[0] #pegar a 1ª atividade criada, 1º posicao do id     
+        response = requests.get(f"{BASE_URL}/tasks/{task_id}")  #enviar a url com o id na requisição GET
+       
+        assert response.status_code == 200  #fazer as condições/recuperações - status_code e id
+       
+        response_json = response.json() #este método vai trazer o corpo da resposta
+        
+        #comparar se o task_id é igual ao identificador que estou tesntando recuperar (response_json['id'])
+        assert task_id == response_json["id"]

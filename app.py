@@ -60,7 +60,7 @@ def get_task(id):
     if t.id == id:
       return jsonify(t.to_dict())
 
-  return jsonify({"message": "Não foi possível encontrar a atividade"}, 404)
+  return jsonify({"message": "Não foi possível encontrar a atividade"}), 404
 
 #parametros de rota 
 '''
